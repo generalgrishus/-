@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'Super Webcomic Bros.';
+    src: local('Super Webcomic Bros.'),
+      url(/Шрифты/SuperWebcomicBros_Rusbyyakustick_-Regular_0.ttf);}
+h1 {
+  color: green;
+  font-family: "Super Webcomic Bros.";
+}
+a {
+  font-family: "Super Webcomic Bros.";
+}
+body {
+  background: url(/img/ekat.jpg);
+  background-size: 100%;
+}

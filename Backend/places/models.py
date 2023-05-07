@@ -13,4 +13,6 @@ class Place(models.Model):
     is_visited = models.BooleanField(default=False)
 
     def __str__(self):
+        if (self.name is None):
+            return "No name"
         return self.name

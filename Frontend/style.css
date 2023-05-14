@@ -1,15 +1,108 @@
-@font-face {
-    font-family: 'Super Webcomic Bros.';
-    src: local('Super Webcomic Bros.'),
-      url(/Шрифты/SuperWebcomicBros_Rusbyyakustick_-Regular_0.ttf);}
-h1 {
-  color: green;
-  font-family: "Super Webcomic Bros.";
+html{
+  scroll-behavior: smooth;
 }
-a {
-  font-family: "Super Webcomic Bros.";
+.backImg{
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: 0;
+  }
+
+.startpageUp {
+  z-index: 1;
+  margin-top: -8px;
+  margin-left: -8px;
+  margin-right: -8px;
+  }
+.goToRegisterPageLink{
+  position: absolute;
+  z-index: 3;
+  margin-left: 1140px;
+  margin-top: 300px;
 }
-body {
-  background: url(/img/ekat.jpg);
-  background-size: 100%;
+.aboutUsButton {
+  z-index: 2;
+  position: absolute;
+  margin-left: 95px;
+  margin-top: 100px;
 }
+.aboutUsHover{
+  z-index: 3;
+  margin-left: 95px;
+  margin-top: 100px;
+  opacity: 0.0;
+  position: absolute;
+  transition: opacity .3s ease;
+}
+.aboutUsHover:hover {
+  z-index: 3;
+  opacity: 1;
+}
+
+.contactUsButton{
+  z-index: 2;
+  position: absolute;
+  width: 330px;
+  margin-left: 97px;
+  margin-top: 213px;
+}
+.contactUsHover {
+  z-index: 3;
+  position: absolute;
+  margin-left: 97px;
+  margin-top: 213px;
+  width: 330px;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+ .contactUsHover:hover{
+   z-index: 3;
+   opacity: 1;
+ }
+.openMapLink{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 20px;
+  position: absolute;
+  width: 450px;
+  height: 190px;
+  top: 487px;
+  left: 849px;
+}
+.startpageCenter{
+  position: relative;
+  margin: -8px;
+}
+.startPageFirstBottom{
+  margin: -8px;
+  background-size: 100%, 100%;
+}
+.bottomPicture{
+  z-index: 2;
+  position: absolute;
+  margin: -8px;
+  background-size: 100%, 100%;
+}
+.sendButton{
+  opacity: 1;
+  z-index: 2;
+  position: absolute;
+  margin-left: 1047px;
+  margin-top: 267px;
+}
+.sendButtonHover{
+  position: absolute;
+  opacity: 0;
+  z-index: 2;
+  margin-left: 1047px;
+  margin-top: 267px;
+  transition: opacity .3s ease;
+}
+.sendButton, .sendButtonHover:hover{
+  opacity: 1;
+
+}
+

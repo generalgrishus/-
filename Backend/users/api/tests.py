@@ -1,22 +1,17 @@
 from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
+from rest_framework.exceptions import APIException
+
+from django.urls import reverse
 
 
 class RegistrationTestCase(APITestCase):
-    url = '/api/reg'
-
-    def post(self, payload, url=None):
-        if url is None:
-            url = self.url
-
-        return self.client.post(url, payload, format='json')
-
     def test_my_function(self):
         payload = {
             'username' : 'sony',
             'email' : 'sony@email.com',
-            'password1' : 'abcd',
-            'password2' : 'abcd'
+            'password1' : 'abcdefgfgfgffgff',
+            'password2' : 'abcdefgfgfgffgff'
         }
-        response = self.post(payload)
+        response = self.client.post(reverse('register'), payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)

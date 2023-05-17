@@ -2,7 +2,7 @@ from rest_framework import status
 from rest_framework.test import APIClient, APITestCase
 
 
-class MyTestCase(APITestCase):
+class RegistrationTestCase(APITestCase):
     url = '/api/reg'
 
     def post(self, payload, url=None):

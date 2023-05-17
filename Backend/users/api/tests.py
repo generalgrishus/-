@@ -3,16 +3,9 @@ from rest_framework.test import APIClient, APITestCase
 
 
 class MyTestCase(APITestCase):
-    url = '/url'
+    url = '/api/reg'
 
     def post(self, payload, url=None):
-        """
-        Helper to send an HTTP post.
-
-        @param (dict) payload: request body
-
-        @returns: response
-        """
         if url is None:
             url = self.url
 

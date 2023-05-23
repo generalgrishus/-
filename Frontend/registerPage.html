@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Регистрация Артёма</title>
+  <!--<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="sendRequest.js" type="module"></script>-->
 </head>
 <body>
   <p>Введите имя</p>
@@ -13,8 +15,18 @@
   <input type = "button" value="Отправить">
 <script>
   let user = '{"name":"Артем", "surname":"Ханнанов"}';
+  axios({
+  method: 'post',
+  url: 'https://2dc5-178-46-87-239.ngrok-free.app/api/reg/',
+  data: {
+    username: 'Fred',
+    email: 'dksddsk@mail.ru',
+    password1: '123456789qwerty',
+    password2: '123456789qwerty'
+  }
+});
   user = JSON.parse(user);
-
+  console.log(user);
 </script>
 </body>
 </html>

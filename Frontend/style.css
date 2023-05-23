@@ -1,3 +1,6 @@
+html::-webkit-scrollbar{
+  width:0;
+}
 html{
   scroll-behavior: smooth;
 }
@@ -73,8 +76,14 @@ html{
   left: 849px;
 }
 .startpageCenter{
+  z-index: 2;
   position: relative;
   margin: -8px;
+}
+.inf{
+  position: absolute;
+  margin-top: 750px;
+  margin-left: 100px;
 }
 .startPageFirstBottom{
   margin: -8px;
@@ -103,6 +112,10 @@ html{
 }
 .sendButton, .sendButtonHover:hover{
   opacity: 1;
-
 }
-
+.Vysotskiy.a{
+  text-align: center;
+}
+.backToStart{
+  position: relative;
+}

@@ -13,7 +13,7 @@ def json_response(isSuccess, errors):
     return Response(json.dumps({
     'success': isSuccess,
     'errors': errors,
-}))
+}, indent=2, ensure_ascii=False))
 
 @api_view(['POST'])
 def create_user(request):

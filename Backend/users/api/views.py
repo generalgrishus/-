@@ -9,14 +9,17 @@ from users.forms import RegistrationUserForm
 
 import json
 
+def json_response(isSuccess, errors):
+    return Response(json.dumps({
+    'success': isSuccess,
+    'errors': errors,
+}, indent=2, ensure_ascii=False))
+
 @api_view(['POST'])
 def create_user(request):
     form = RegistrationUserForm(request.data)
-    print(request.data)
     if form.is_valid():
         user = form.save()
         login(request, user)
-    else:
-        print(form.errors)
-        raise APIException()
-    return Response()
+        return json_response(True, None)
+    return json_response(False, dict(form.errors.items()))

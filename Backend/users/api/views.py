@@ -3,9 +3,10 @@ from rest_framework.exceptions import APIException
 from rest_framework.response import Response
 from rest_framework import status
 
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 
 from users.forms import RegistrationUserForm
+from django.contrib.auth.forms import AuthenticationForm
 
 import json
 
@@ -22,4 +23,16 @@ def create_user(request):
         user = form.save()
         login(request, user)
         return json_response(True, None)
+    return json_response(False, dict(form.errors.items()))
+
+@api_view(['POST'])
+def login_user(request):
+    form = AuthenticationForm(request, request.data)
+    if form.is_valid():
+        username = form.cleaned_data.get('username')
+        password = form.cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return json_response(True, None)
     return json_response(False, dict(form.errors.items()))

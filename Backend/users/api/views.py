@@ -3,7 +3,7 @@ from rest_framework.exceptions import APIException
 from rest_framework.response import Response
 from rest_framework import status
 
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 
 from users.forms import RegistrationUserForm
 from django.contrib.auth.forms import AuthenticationForm
@@ -36,3 +36,8 @@ def login_user(request):
             login(request, user)
             return json_response(True, None)
     return json_response(False, dict(form.errors.items()))
+
+@api_view(['POST'])
+def logout_user(request):
+    logout(request)
+    return Response()

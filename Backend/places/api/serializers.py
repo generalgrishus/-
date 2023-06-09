@@ -20,3 +20,10 @@ class NoteSerializer(ModelSerializer):
     class Meta:
         model = Note
         fields = '__all__'
+
+    def validate(self, data):
+        print(Place.objects.get(id=data['place'].id).creator)
+        print(self.context['request'].user)
+        if Place.objects.get(id=data['place'].id).creator != self.context['request'].user:
+            raise serializers.ValidationError("Этот пользователь не авторизован.")
+        return data

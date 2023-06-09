@@ -1,7 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 
-from places.models import Place
+from places.models import Place, Note
 class PlaceSerializer(ModelSerializer):
     id = serializers.UUIDField(format='hex', required=False)
     creator = serializers.HiddenField(default=serializers.CurrentUserDefault())
@@ -15,3 +15,8 @@ class PlaceWithoutLonLatSerializer(ModelSerializer):
     class Meta:
         model = Place
         fields = ['id', 'name', 'description', 'creator', 'is_visited']
+
+class NoteSerializer(ModelSerializer):
+    class Meta:
+        model = Note
+        fields = '__all__'

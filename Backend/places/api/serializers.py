@@ -27,3 +27,8 @@ class NoteSerializer(ModelSerializer):
         if Place.objects.get(id=data['place'].id).creator != self.context['request'].user:
             raise serializers.ValidationError("Этот пользователь не авторизован.")
         return data
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+        ret['place'] = ret['place'].hex
+        return ret

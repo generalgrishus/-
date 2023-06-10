@@ -1,8 +1,9 @@
-from .serializers import PlaceSerializer, PlaceWithoutLonLatSerializer
+from .serializers import PlaceSerializer, PlaceWithoutLonLatSerializer, NoteSerializer, NoteWithoutPlaceSerializer
 
 from rest_framework import viewsets
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
+from places.models import Note
 
 class PlaceViewSet(viewsets.ModelViewSet):
     authentication_classes = [BasicAuthentication]
@@ -20,4 +21,23 @@ class PlaceViewSet(viewsets.ModelViewSet):
 
         if self.request.method == 'PUT':
             serializer_class = PlaceWithoutLonLatSerializer
+        return serializer_class
+
+class NoteViewSet(viewsets.ModelViewSet):
+    authentication_classes = [BasicAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    lookup_field = 'pk'
+    lookup_value_regex = '[0-9a-f]{32}'
+    
+    serializer_class = NoteSerializer
+    
+    def get_queryset(self):
+        return Note.objects.filter(place__creator=self.request.user)
+
+    def get_serializer_class(self):
+        serializer_class = self.serializer_class
+
+        if self.request.method == 'PUT':
+            serializer_class = NoteWithoutPlaceSerializer
         return serializer_class

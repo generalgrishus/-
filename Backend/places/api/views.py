@@ -26,6 +26,9 @@ class PlaceViewSet(viewsets.ModelViewSet):
 class NoteViewSet(viewsets.ModelViewSet):
     authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
+
+    lookup_field = 'pk'
+    lookup_value_regex = '[0-9a-f]{32}'
     
     serializer_class = NoteSerializer
     

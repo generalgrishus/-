@@ -20,13 +20,17 @@ class PlaceWithoutLonLatSerializer(PlaceSerializer):
         fields = ['id', 'name', 'description', 'creator', 'is_visited']
 
 class NoteSerializer(ModelSerializer):
-    place = serializers.PrimaryKeyRelatedField(read_only=True)
     class Meta:
         model = Note
         fields = '__all__'
 
     def validate(self, data):
-        if Place.objects.get(id=self.context['view'].kwargs.get('pk')).creator != self.context['request'].user:
+        object_id = None
+        if self.instance:
+            object_id = self.instance.place.id
+        else:
+            object_id = data['place'].id
+        if Place.objects.get(id=object_id).creator != self.context['request'].user:
             raise serializers.ValidationError("Этот пользователь не авторизован.")
         return data
 
@@ -34,3 +38,9 @@ class NoteSerializer(ModelSerializer):
         ret = super().to_representation(instance)
         ret['place'] = ret['place'].hex
         return ret
+
+class NoteWithoutPlaceSerializer(NoteSerializer):
+    place = serializers.PrimaryKeyRelatedField(read_only=True)
+    class Meta:
+        model = Note
+        fields = '__all__'

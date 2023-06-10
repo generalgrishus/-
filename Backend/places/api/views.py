@@ -1,4 +1,4 @@
-from .serializers import PlaceSerializer, PlaceWithoutLonLatSerializer, NoteSerializer
+from .serializers import PlaceSerializer, PlaceWithoutLonLatSerializer, NoteSerializer, NoteWithoutPlaceSerializer
 
 from rest_framework import viewsets
 from rest_framework.authentication import BasicAuthentication
@@ -34,3 +34,10 @@ class NoteViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         return Note.objects.filter(place__creator=self.request.user)
+
+    def get_serializer_class(self):
+        serializer_class = self.serializer_class
+
+        if self.request.method == 'PUT':
+            serializer_class = NoteWithoutPlaceSerializer
+        return serializer_class

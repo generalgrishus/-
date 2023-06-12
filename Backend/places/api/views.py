@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticated
 from places.models import Note
 
 class PlaceViewSet(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication]
+    #authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
 
     serializer_class = PlaceSerializer
@@ -24,7 +24,7 @@ class PlaceViewSet(viewsets.ModelViewSet):
         return serializer_class
 
 class NoteViewSet(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication]
+    #authentication_classes = [BasicAuthentication]
     permission_classes = [IsAuthenticated]
 
     lookup_field = 'pk'

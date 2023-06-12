@@ -27,7 +27,7 @@ html{
 .aboutUsButton {
   z-index: 2;
   position: absolute;
-  margin-left: 95px;
+  margin-left: 5%;
   margin-top: 100px;
 }
 .aboutUsHover{
@@ -113,9 +113,4 @@ html{
 .sendButton, .sendButtonHover:hover{
   opacity: 1;
 }
-.Vysotskiy.a{
-  text-align: center;
-}
-.backToStart{
-  position: relative;
-}
+

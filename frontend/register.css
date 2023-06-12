@@ -1,0 +1,14 @@
+.usernameText{
+    background-color:pink;
+    color: deepskyblue;
+}
+.emailText{
+    color: green;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size:larger;
+}
+.image1{
+    margin: 20;
+    width: 20%;
+    height: 20%;
+}

@@ -1,0 +1,167 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <title>ЕКАРТА</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="leaflet.css">
+
+  <meta name="theme-color" content="#fafafa">
+</head>
+
+<body>
+  <div class = "map-wrapper">
+    <div class = "map" id="map"></div>
+    <div class = "backToStart">
+      <a href="startpage.html"><img src ="img/tostartPageButton.png"></a>
+    </div>
+    <div class = "block">
+      <button type ="button" id = "markLoc" onclick = "addMarker()">Добавить место на карту</button><br>
+      <input type="checkbox" checked = "checked" id="greenmarkertoggle" class = "cityFilter" name = "shoppingMalls"/>
+      <label for="greenmarkertoggle">ПЛОТИНКА!!!!</label><br>
+      <input type="checkbox" checked = "checked" id="bluemarkertoggle" class = "cityFilter"/>
+      <label for="bluemarkertoggle">Не плотинка...</label>
+    </div>
+  </div>
+  
+  <div id="marker"></div>
+  <div id="custom-popup"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+  <script>
+    var map, newMarker, markerLocation;
+    var popup = L.popup({
+    closeButton: true,
+    autoClose: true,
+    className: "custom-popup"
+    })
+    var customIcon1 = L.icon({
+      iconUrl: 'img/icon1.png',
+      iconSize: [37, 51],
+      popupAnchor: [-380, 250]
+    });
+    var userIcon = L.icon({
+      iconUrl: 'img/userIcon.png',
+      iconSize: [37, 51],
+      popupAnchor: [-380, 250]
+    });
+
+    map = L.map('map', {
+      center: [56.8309, 60.5946],
+      zoom: 12.5});
+    L.tileLayer('https://api.mapbox.com/styles/v1/generalgrishus/clhmfa98c01qx01p6ci5d99ww/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZ2VuZXJhbGdyaXNodXMiLCJhIjoiY2xnejFrMTJlMGY4YjNwcG54MDloaXQ3ZSJ9.N0i1jCyysnamgv6lbrJYMg', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery  <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 19,    
+    }).addTo(map);
+    map.zoomControl.setPosition('bottomleft');
+    var layer1 = L.geoJSON(null, {layerName: 'layer1'}).addTo(map);
+    var touristPoint = L.marker([56.83845, 60.60332], {icon : customIcon1 }).addTo(layer1);
+    touristPoint.bindPopup('Мост "Плотинка"');
+    var layer2 = L.geoJSON(null, {layerName: 'layer2'}).addTo(map);
+    var marker = L.marker([56.84387, 60.65367], {icon : customIcon1 }).addTo(layer2);
+    marker.bindPopup(popup);
+    marker = L.marker([56.83242, 60.60744], {icon : customIcon1 }).addTo(layer2);
+    marker.bindPopup('Памятник "Клавиатуре"');
+     
+    marker = L.marker([56.82878, 60.59911], {icon : customIcon1 }).addTo(layer2);
+    marker.bindPopup('Торговый центр "Гринвич"');
+    marker = L.marker([56.84638, 60.67985], {icon : customIcon1 }).addTo(layer2);
+    marker.bindPopup('Шарташские каменные палатки');
+    // marker = L.marker([56.83242, 60.60744], {icon : customIcon1 }).addTo(map);
+    // marker.bindPopup('Памятник "Клавиатуре"');
+    // marker = L.marker([56.83242, 60.60744], {icon : customIcon1 }).addTo(map);
+    // marker.bindPopup('Памятник "Клавиатуре"');
+    // marker = L.marker([56.83242, 60.60744], {icon : customIcon1 }).addTo(map);
+    // marker.bindPopup('Памятник "Клавиатуре"');
+    marker = L.marker([56.8146, 60.6432], {icon : customIcon1 }).addTo(layer2);
+    marker.bindPopup("Парк имени Маяковского");
+    touristPoint = L.marker([56.83598, 60.61456], {icon : customIcon1 }, {
+      title: "Бизнес-центр Высоцкий",
+    }).addTo(layer2);
+    touristPoint.bindPopup("<div class = 'sightWindow'>" + '<h2>Смотровая площадка бизнес центра "Высоцкий"</h2>' +
+      "<img src='img/высоцкий.jpg' width='300px' height='170px'>"+
+      "</div>" +
+      "<p></p>" +
+      "<i><b><a href='VysotskyPage.html'>Бизнес-центр Высоцкий</a></b></i>");  
+    
+  </script>
+
+  <script>
+    var checkbox = document.querySelector('.cityFilter');
+    checkbox.addEventListener('change', function(){
+      if (this.checked){
+        console.log("Checked");
+      } else{
+        console.log("Not checked");
+      }
+    });
+  </script>
+
+  <script>
+    var checkbox1 = document.getElementById("greenmarkertoggle");
+    var checkbox2 = document.getElementById("bluemarkertoggle");
+    function handleCheckbox() {
+    if (checkbox1.checked) {
+      map.addLayer(layer1);
+    } else {
+      map.removeLayer(layer1);
+    }
+  
+    if (checkbox2.checked) {
+      map.addLayer(layer2);
+    } else {
+      map.removeLayer(layer2);
+    }
+  }
+  checkbox1.addEventListener('change', handleCheckbox);
+  checkbox2.addEventListener('change', handleCheckbox);
+  </script>
+  <script>
+    addMarker = function(){
+      var newMarkerGroup = new L.layerGroup();
+    map.addLayer(newMarkerGroup);
+    map.on('click', function(e){
+      var markersCount = newMarkerGroup.getLayers().length;
+      if (markersCount < 1) {
+        var mark = L.marker(e.latlng, {icon : userIcon }).addTo(newMarkerGroup);
+        return;
+    }
+      
+    });
+    }
+  </script>
+
+  <!-- Add your site or application content here -->
+  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async></script>
+</body>
+
+</html>

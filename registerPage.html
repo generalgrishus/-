@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация пользователя</title>
+  <link rel="stylesheet" href="register.css">
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <a href = "startpage.html"><img src = "img/tostartPageButton.png" width = 20%></a>
+  <p>Придумайте логин</p>
+  <input class="usernameText" type = "text" id= "username">
+  <p class = "emailText">Введите Email</p>
+  <input type = "text" id = "email">
+  <p><img class = "image1" src = "img/aboutUs.png"></p>
+  <input type = "password" id = "password1">
+  <p>Повторите пароль</p>
+  <input type = "password" id = "password2">
+  <p></p>
+  <button type="button" onclick="send()"><img src = "img/add.jpg"></button><br>
+
+  <a href ="authorizationPage.html">Уже регистрировались? Авторизуйтесь</a>
+
+  <p id = "container" style="color: orangered;"></p>
+  <p id = "container1" style="color: orangered;"></p>
+  <p id = "container2" style="color: orangered;"></p>
+
+  <script>
+    send = function(){
+      const requestUrl = 'https://ada0-212-220-231-50.ngrok-free.app/api/reg/';
+      //const reqUrl = 'https://jsonplaceholder.typicode.com/posts'
+      const userData = {  
+        username: "qfasdsadassdf",
+        email: "sdadsdasasvsvds@mail.ru",
+        password1: "Uhbif134",
+        password2: "Uhbif134"
+      // username: username.value,
+      // email: email.value,
+      // password1: password1.value,
+      // password2: password2.value
+    };
+    const request = axios.post(requestUrl, userData)
+    .then(function (response) {
+      const returnData = (response.data);
+      jsonData = JSON.parse(returnData);
+      receivedErrors = jsonData.errors;
+      console.log(receivedErrors);
+      if (receivedErrors != null){
+        const container = document.getElementById('password2');
+        const answer = document.createElement('p');
+        if (receivedErrors.username){
+          answer.innerText = `${receivedErrors.username[0]}`
+          container.appendChild(answer);
+        }
+        if (receivedErrors.email){
+          answer.innerText = `${receivedErrors.email[0]}`
+          container.appendChild(answer);
+        }
+        if (receivedErrors.password1){
+          answer.innerText = `${receivedErrors.password1[0]}`
+          container.appendChild(answer);
+        }
+        if (receivedErrors.password2){
+          answer.innerText = `${receivedErrors.password2[0]}`
+          container.appendChild(answer);
+        }
+        
+        //asdsasa@mail.ru
+      }
+      else if (jsonData.success == true){  
+         if (getRequest()){
+            window.location.href = 'index.html';
+         }  
+      }
+      })
+    }
+  </script>
+
+<script>
+  function getRequest(){
+    fetch("https://ada0-212-220-231-50.ngrok-free.app/places/",
+    {
+        method: "GET",
+        credentials: 'include'
+    })
+    .then(response => response.json())
+    .then(function(data) {
+    console.log(data);
+    });
+  }
+</script>
+</body>
+</html>

@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from corsheaders.defaults import default_headers
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,10 +27,39 @@ SECRET_KEY = 'django-insecure-(k)xr)&fif#)o-!7axi3m=51-m310)yd&2=16m5vb3k14m@=38
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Application definition
 ALLOWED_HOSTS = ['*']
 
+CORS_ORIGIN_ALLOW_ALL = False
 
-# Application definition
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOWED_ORIGINS = [
+    'http://127.0.0.1:8887'
+]
+
+CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1:8887', 'http://localhost:8887', 'http://127.0.0.1:8000']
+
+CORS_ALLOW_METHODS = [
+    'OPTIONS',
+    'DELETE',
+    'GET',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+
+CORS_ALLOW_HEADERS = (
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+)
 
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
@@ -42,6 +72,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'corsheaders',
     'rest_framework',
 ]
 
@@ -55,8 +86,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'map_project.urls'
 

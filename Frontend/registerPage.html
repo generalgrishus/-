@@ -34,16 +34,16 @@
       const requestUrl = 'http://127.0.0.1:8000/api/reg/';
       //const reqUrl = 'https://jsonplaceholder.typicode.com/posts'
       const userData = {  
-        username: "ppppppeee",
-        email: "ppppppeee@mail.ru",
-        password1: "Uhbif134",
-        password2: "Uhbif134"
+        // username: "ppppppeepe",
+        // email: "ppppppeepe@mail.ru",
+        // password1: "Uhbif134",
+        // password2: "Uhbif134"
+      username: username.value,
+      email: email.value,
+      password1: password1.value,
+      password2: password2.value
       // username: username.value,
-      // email: email.value,
-      // password1: password1.value,
-      // password2: password2.value
-      // username: "sonyavvvvv",
-      // password: ""
+      // password: email.value//"abcdefgfgfgffgff"
     };
     var cookie = Cookies.get('csrftoken');
     const config = {
@@ -52,13 +52,15 @@
         credentials: 'include',
         body: JSON.stringify(userData)
     };
-    const request = fetch("http://127.0.0.1:8000/api/reg/", config
+    
+    const request = fetch(requestUrl, config
     )
     .then(response => response.json())
     .then(function (response) {
       const returnData = (response);
       jsonData = JSON.parse(returnData);
       receivedErrors = jsonData.errors;
+      console.log(receivedErrors)
       if (receivedErrors != null){
         console.log('here is not null');
         const container = document.getElementById('password2');
@@ -86,14 +88,7 @@
         console.log("here is null");
         if (jsonData.success == true)
         {
-          window.location.href = window.location.href
-          const isRequestSuccess = (async () => {
-          return await getRequest()
-          })();
-
-          if (isRequestSuccess){
-              window.location.href = 'index.html';
-          }
+          window.location.href = 'index.html'
         }  
       }
       })
@@ -102,19 +97,7 @@
   </script>
 
 <script>
-  async function getRequest(){
-    // axios.get("http://127.0.0.1:8000/places/", withCredentials=true)
-    // .then(response => response.json())
-    // .then(function(data) {
-    // console.log(data);
-    // });
-    var result = await fetch("http://127.0.0.1:8000/places/",
-    {
-        method: "GET",
-        credentials: 'include'
-    })
-    return result.status == 200;
-  }
+  
 </script>
 </body>
 </html>

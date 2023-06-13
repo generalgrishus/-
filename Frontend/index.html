@@ -6,7 +6,6 @@
   <title>ЕКАРТА</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
      crossorigin=""/>
@@ -48,6 +47,36 @@
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
      crossorigin=""></script>
+    <script>
+      async function getGETJsonAsync(){
+        const response = await getGETResponseAsync()
+        const jsonData = await response.json()
+        return jsonData
+      }
+    </script>
+    <script>
+      async function getGETResponseAsync(){
+      const response = await fetch(
+              "http://127.0.0.1:8000/places/",
+              {
+                  method: "GET",
+                  credentials: 'include'
+              }
+      )
+      return response
+    }
+    </script>
+    <script>
+      async function setPersonalMarkers(map, customIcon){
+        const jsonData = await getGETJsonAsync()
+        for(let i = 0; i < jsonData.length; i++) {
+            let obj = jsonData[i];
+            const coordinates = [obj.lat, obj.lon]
+            marker = L.marker(coordinates, {icon : customIcon }).addTo(layer2);
+    marker.bindPopup(obj.name);
+        }
+      }
+    </script>
   <script>
     var map, newMarker, markerLocation;
     var popup = L.popup({
@@ -65,7 +94,7 @@
       iconSize: [37, 51],
       popupAnchor: [-380, 250]
     });
-
+    
     map = L.map('map', {
       center: [56.8309, 60.5946],
       zoom: 12.5});
@@ -82,7 +111,7 @@
     marker.bindPopup(popup);
     marker = L.marker([56.83242, 60.60744], {icon : customIcon1 }).addTo(layer2);
     marker.bindPopup('Памятник "Клавиатуре"');
-     
+    
     marker = L.marker([56.82878, 60.59911], {icon : customIcon1 }).addTo(layer2);
     marker.bindPopup('Торговый центр "Гринвич"');
     marker = L.marker([56.84638, 60.67985], {icon : customIcon1 }).addTo(layer2);
@@ -103,7 +132,7 @@
       "</div>" +
       "<p></p>" +
       "<i><b><a href='VysotskyPage.html'>Бизнес-центр Высоцкий</a></b></i>");  
-    
+    (async() => {await setPersonalMarkers(map, customIcon1)})()
   </script>
 
   <script>
@@ -150,6 +179,9 @@
     });
     }
   </script>
+
+  
+  
 
   <!-- Add your site or application content here -->
   <script src="js/vendor/modernizr-3.11.2.min.js"></script>

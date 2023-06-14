@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>Авторизация</title>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="
+    https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js
+    "></script>
 </head>
 <body>
   <p>Введите логин</p>
@@ -15,14 +18,23 @@
 
   <script>
     send = function(){
-      const requestUrl = 'https://ada0-212-220-231-50.ngrok-free.app/api/auth/';
+      const requestUrl = 'http://127.0.0.1:8000/api/auth/';
       const userData = {  
       username: username.value,
       password: password.value,
     }
-    const request = axios.post(requestUrl, userData)
+    var cookie = Cookies.get('csrftoken');
+    const config = {
+        method: "POST",
+        headers: new Headers({"content-type": "application/json"},{'X-CSRFToken': cookie}),
+        credentials: 'include',
+        body: JSON.stringify(userData)
+    };
+    const request = fetch(requestUrl, config
+    )
+    .then(response => response.json())
     .then(function (response) {
-      const returnData = (response.data);
+      const returnData = (response);
       jsonData = JSON.parse(returnData);
       receivedErrors = jsonData.errors;
       console.log(receivedErrors);
@@ -44,15 +56,11 @@
       }
       else if (jsonData.success == true){
         window.location.href = 'index.html';
-        getRequest();
       }
       })
     }
   </script>
   <script>
-    function getRequest(){
-      
-    }
   </script>
 </body>
 </html>

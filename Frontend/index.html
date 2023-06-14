@@ -47,6 +47,9 @@
   <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
      crossorigin=""></script>
+     <script src="
+     https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js
+     "></script>
     <script>
       async function getGETJsonAsync(){
         const response = await getGETResponseAsync()
@@ -67,6 +70,24 @@
     }
     </script>
     <script>
+      async function postAsync(data){
+        var cookie = Cookies.get('csrftoken');
+        console.log(data)
+        const config = {
+        method: "POST",
+        headers: {
+        "X-CSRFToken": cookie,
+        "Content-Type": "application/json",
+    },
+        credentials: 'include',
+        body: data
+    };
+        const response = await fetch("http://127.0.0.1:8000/places/", config)
+        const json = await response.json()
+        console.log(json)
+    }
+    </script>
+    <script>
       async function setPersonalMarkers(map, customIcon){
         const jsonData = await getGETJsonAsync()
         for(let i = 0; i < jsonData.length; i++) {
@@ -74,13 +95,12 @@
             const coordinates = [obj.lat, obj.lon]
             const marker = L.marker(coordinates, {icon : customIcon }).addTo(layer2);
             marker._leaflet_id = obj.id;
-            
-            marker.bindPopup(createPlaceForm(obj.name, obj.description, obj.is_visited, isPersonalMarker=true));
+            marker.bindPopup(createPlaceForm(marker, obj.name, obj.description, obj.is_visited, isPersonalMarker=true));
         }
       }
     </script>
     <script>
-      function createPlaceForm(name, description, isVisited=false, isPersonalMarker=false){
+      function createPlaceForm(marker, name, description, isVisited=false, isPersonalMarker=false){
         var form = document.createElement("form");
         var NAME = document.createElement("input");
         $(NAME).attr("type", "text")
@@ -113,6 +133,26 @@
           $(form).append("<br>")
         .append(SUBMIT);
         }
+
+        $(form).submit(function(e) {
+          e.preventDefault();
+          console.log(marker._leaflet_id)
+          if (marker._leaflet_id == null)
+          {
+            const formData = new FormData(e.target);
+            console.log(CHECKBOX.checked)
+            var formJson = {
+              name: formData.get('placeName'),
+              lat: marker.getLatLng().lat.toFixed(6),
+              lon: marker.getLatLng().lng.toFixed(6),
+              description: formData.get('placeDescription'),
+              is_visited: CHECKBOX.checked
+            };
+            (async() => {await postAsync(JSON.stringify(formJson))})();
+            map.closePopup();
+            marker.setIcon(customIcon1);
+          }
+        });
 
         return form
       }
@@ -212,8 +252,10 @@
     map.on('click', function(e){
       var markersCount = newMarkerGroup.getLayers().length;
       if (markersCount < 1) {
-        var mark = L.marker(e.latlng, {icon : userIcon }).addTo(newMarkerGroup)
-        .bindPopup(createPlaceForm("Новое место", "Описание", isVisited=false, isPersonalMarker=true))
+        var mark = L.marker(e.latlng, {icon : userIcon }).addTo(newMarkerGroup);
+        mark._leaflet_id = null;
+        mark
+        .bindPopup(createPlaceForm(mark, "Новое место", "Описание", isVisited=false, isPersonalMarker=true))
         .openPopup();
         return;
     }

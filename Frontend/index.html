@@ -72,8 +72,9 @@
         for(let i = 0; i < jsonData.length; i++) {
             let obj = jsonData[i];
             const coordinates = [obj.lat, obj.lon]
-            marker = L.marker(coordinates, {icon : customIcon }).addTo(layer2);
-    marker.bindPopup(obj.name);
+            const marker = L.marker(coordinates, {icon : customIcon }).addTo(layer2);
+            marker._leaflet_id = obj.id;
+            marker.bindPopup(obj.name);
         }
       }
     </script>

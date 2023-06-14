@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
      crossorigin=""/>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   <meta property="og:title" content="">
   <meta property="og:type" content="">
   <meta property="og:url" content="">
@@ -74,8 +74,47 @@
             const coordinates = [obj.lat, obj.lon]
             const marker = L.marker(coordinates, {icon : customIcon }).addTo(layer2);
             marker._leaflet_id = obj.id;
-            marker.bindPopup(obj.name);
+            
+            marker.bindPopup(createPlaceForm(obj.name, obj.description, obj.is_visited, isPersonalMarker=true));
         }
+      }
+    </script>
+    <script>
+      function createPlaceForm(name, description, isVisited=false, isPersonalMarker=false){
+        var form = document.createElement("form");
+        var NAME = document.createElement("input");
+        $(NAME).attr("type", "text")
+        .attr("name", "placeName")
+        .attr("value", name);
+
+        var DESCRIPTION = document.createElement("textarea");
+        $(DESCRIPTION).attr("name", "placeDescription")
+        .append(description);
+
+        var CHECKBOX = document.createElement("input");
+        $(CHECKBOX).attr("type", "checkbox")
+        .attr("name", "placeIsVisited")
+        .prop("checked", isVisited);
+
+        $(form).attr("class", "placeForm")
+        .append("<h1>Название: </h1>")
+        .append(NAME)
+        .append("<br>")
+        .append("<h1>Описание: </h1>")
+        .append(DESCRIPTION)
+        .append("<br>")
+        .append("<h1>Посещено?</h1>")
+        .append(CHECKBOX);
+
+        if (isPersonalMarker){
+          var SUBMIT = document.createElement("input");
+          $(SUBMIT).attr("type", "submit")
+          .attr("name", "submitButton");
+          $(form).append("<br>")
+        .append(SUBMIT);
+        }
+
+        return form
       }
     </script>
   <script>
@@ -173,7 +212,9 @@
     map.on('click', function(e){
       var markersCount = newMarkerGroup.getLayers().length;
       if (markersCount < 1) {
-        var mark = L.marker(e.latlng, {icon : userIcon }).addTo(newMarkerGroup);
+        var mark = L.marker(e.latlng, {icon : userIcon }).addTo(newMarkerGroup)
+        .bindPopup(createPlaceForm("Новое место", "Описание", isVisited=false, isPersonalMarker=true))
+        .openPopup();
         return;
     }
       

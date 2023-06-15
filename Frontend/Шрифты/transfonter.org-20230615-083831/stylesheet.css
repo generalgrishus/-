@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'TatianaCTT';
+    src: url('TatianaCTT.eot');
+    src: url('TatianaCTT.eot?#iefix') format('embedded-opentype'),
+        url('TatianaCTT.woff2') format('woff2'),
+        url('TatianaCTT.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

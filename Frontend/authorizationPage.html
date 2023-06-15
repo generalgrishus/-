@@ -1,58 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Авторизация</title>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="
+    https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js
+    "></script>
+  <script src="authorizPageJS.js"></script>
+  <link rel="stylesheet" href="authorize.css">
 </head>
-<body>
-  <p>Введите логин</p>
-  <input type = "text" id= "username">
-  <p>Введите пароль</p>
-  <input type = "password" id = "password">
-  <p></p>
-  <button type="button" onclick="send()">Войти</button>
 
-  <script>
-    send = function(){
-      const requestUrl = 'https://ada0-212-220-231-50.ngrok-free.app/api/auth/';
-      const userData = {  
-      username: username.value,
-      password: password.value,
-    }
-    const request = axios.post(requestUrl, userData)
-    .then(function (response) {
-      const returnData = (response.data);
-      jsonData = JSON.parse(returnData);
-      receivedErrors = jsonData.errors;
-      console.log(receivedErrors);
-      if (receivedErrors != null){
-        const container = document.getElementById('container');
-        const answer = document.createElement('p');
-        if (receivedErrors.__all__){
-          answer.innerText = `${receivedErrors.__all__[0]}`
-          container.appendChild(answer);
-        }
-        if (receivedErrors.username){
-          answer.innerText = `${receivedErrors.username[0]}`
-          container.appendChild(answer);
-        }
-        if (receivedErrors.password){
-          answer.innerText = `${receivedErrors.password[0]}`
-          container.appendChild(answer);
-        }
-      }
-      else if (jsonData.success == true){
-        window.location.href = 'index.html';
-        getRequest();
-      }
-      })
-    }
-  </script>
-  <script>
-    function getRequest(){
-      
-    }
-  </script>
+<body>
+  <div class="authorizedPageBack">
+    <img class="backgroundImg" src="img/authBackground.png">
+  </div>
+  <div class="authorizedPageFront">
+    <img class="backToStart" src="img/backButtonReg.png">
+    <a href="startpage.html"><img class="backToStartHover" src="img/backButtonHover.png"></a>
+    <input class="usernameText" type="text" id="username"><br>
+    <input class="passwordText" type="password" id="password"><br>
+    <img class="tryLogin" src="img/login.png"><br>
+    <img class="tryLoginHover" src="img/loginHover.png" onclick="send()">
+  </div>
 </body>
+
 </html>

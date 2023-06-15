@@ -6,10 +6,10 @@
   <title>ЕКАРТА</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-     crossorigin=""/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+
   <meta property="og:title" content="">
   <meta property="og:type" content="">
   <meta property="og:url" content="">
@@ -24,251 +24,75 @@
   <link rel="stylesheet" href="leaflet.css">
 
   <meta name="theme-color" content="#fafafa">
-  <script src="indexMap.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossorigin=""></script>
-     <script src="
-     https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js
-     "></script>
 </head>
 
 <body>
-  <div class = "map-wrapper">
-    <div class = "map" id="map"></div>
-    <div class = "backToStart">
-      <a href="startpage.html"><img src ="img/tostartPageButton.png"></a>
+  <div class="map-wrapper">
+    <div class="map" id="map"></div>
+    <div class="backToStart">
+      <a href="startpage.html"><img src="img/tostartPageButton.png"></a>
     </div>
-    <div class = "block">
-      <button type ="button" id = "markLoc" onclick = "addMarker()">Добавить место на карту</button><br>
-      <input type="checkbox" checked = "checked" id="greenmarkertoggle" class = "cityFilter" name = "shoppingMalls"/>
+    <div class="block">
+      <button type="button" id="markLoc" onclick="addMarker()">Добавить место на карту</button><br>
+      <a class="btn-modal" href="#modal-block">Фильтры</a>
+    </div>
+
+    <div id="modal-block">
+      <a class="close-block" href="#close-block">X</a>
+      <input type="checkbox" checked="checked" id="greenmarkertoggle" class="cityFilter" name="shoppingMalls" />
       <label for="greenmarkertoggle">ПЛОТИНКА!!!!</label><br>
-      <input type="checkbox" checked = "checked" id="bluemarkertoggle" class = "cityFilter"/>
+      <input type="checkbox" checked="checked" id="bluemarkertoggle" class="cityFilter" />
       <label for="bluemarkertoggle">Не плотинка...</label>
     </div>
   </div>
-  
+
   <div id="marker"></div>
   <div id="custom-popup"></div>
+  <div id="custom-window"></div>
 
-  
-    <script>
-      async function getGETJsonAsync(){
-        const response = await getGETResponseAsync()
-        const jsonData = await response.json()
-        return jsonData
-      }
-    </script>
-    <script>
-      async function getGETResponseAsync(){
-      const response = await fetch(
-              "http://127.0.0.1:8000/places/",
-              {
-                  method: "GET",
-                  credentials: 'include'
-              }
-      )
-      return response
-    }
-    </script>
-    <script>
-      async function postAsync(data){
-        var cookie = Cookies.get('csrftoken');
-        console.log(data)
-        const config = {
-        method: "POST",
-        headers: {
-        "X-CSRFToken": cookie,
-        "Content-Type": "application/json",
-    },
-        credentials: 'include',
-        body: data
-    };
-        const response = await fetch("http://127.0.0.1:8000/places/", config)
-        
-        return response
-    }
-    </script>
-    <script>
-      async function putAsync(data, markerId){
-        var cookie = Cookies.get('csrftoken');
-        console.log(data)
-        const config = {
-        method: "PUT",
-        headers: {
-        "X-CSRFToken": cookie,
-        "Content-Type": "application/json",
-    },
-        credentials: 'include',
-        body: data
-    };
-        const response = await fetch(`http://127.0.0.1:8000/places/${markerId}/`, config)
-        
-        return response
-    }
-    </script>
-    <script>
-      async function setPersonalMarkers(map, customIcon){
-        const jsonData = await getGETJsonAsync()
-        for(let i = 0; i < jsonData.length; i++) {
-            let obj = jsonData[i];
-            const coordinates = [obj.lat, obj.lon]
-            const marker = L.marker(coordinates, {icon : customIcon }).addTo(layer2);
-            marker._leaflet_id = obj.id;
-            marker.bindPopup(createPlaceForm(marker, obj.name, obj.description, obj.is_visited, isPersonalMarker=true));
-        }
-      }
-    </script>
-    <script>
-      async function sendPersonalMarkerInfo(marker, data){
-        if (marker._leaflet_id == null){
-          const response = await postAsync(data);
-          const json = await response.json();
-          console.log(json);
-          if (response.status == 201){
-            marker._leaflet_id = json.id;
-            map.closePopup();
-            marker.setIcon(customIcon1);
-          }
-        }
-        else{
-          const response = await putAsync(data, marker._leaflet_id);
-          const json = await response.json();
-          console.log(json);
-          if (response.status == 200){
-            map.closePopup();
-          }
-        }
-      }
-    </script>
-    <script>
-      function createPlaceForm(marker, name, description, isVisited=false, isPersonalMarker=false){
-        var form = document.createElement("form");
-        var NAME = document.createElement("input");
-        $(NAME).attr("type", "text")
-        .attr("name", "placeName")
-        .attr("value", name);
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+  <script src="
+     https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js
+     "></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="indexMap.js"></script>
 
-        var DESCRIPTION = document.createElement("textarea");
-        $(DESCRIPTION).attr("name", "placeDescription")
-        .append(description);
-
-        var CHECKBOX = document.createElement("input");
-        $(CHECKBOX).attr("type", "checkbox")
-        .attr("name", "placeIsVisited")
-        .prop("checked", isVisited);
-
-        $(form).attr("class", "placeForm")
-        .append("<h1>Название: </h1>")
-        .append(NAME)
-        .append("<br>")
-        .append("<h1>Описание: </h1>")
-        .append(DESCRIPTION)
-        .append("<br>")
-        .append("<h1>Посещено?</h1>")
-        .append(CHECKBOX);
-
-        if (isPersonalMarker){
-          var SUBMIT = document.createElement("input");
-          $(SUBMIT).attr("type", "submit")
-          .attr("name", "submitButton");
-          $(form).append("<br>")
-        .append(SUBMIT);
-        }
-
-        $(form).submit(function(e) {
-          e.preventDefault();
-          const formData = new FormData(e.target);
-          if (marker._leaflet_id == null)
-          {
-            var formJson = {
-              name: formData.get('placeName'),
-              lat: marker.getLatLng().lat.toFixed(6),
-              lon: marker.getLatLng().lng.toFixed(6),
-              description: formData.get('placeDescription'),
-              is_visited: CHECKBOX.checked
-            };
-            (async() => {await sendPersonalMarkerInfo(marker, JSON.stringify(formJson))})();
-            
-          }
-          else
-          {
-            var formJson = {
-              name: formData.get('placeName'),
-              description: formData.get('placeDescription'),
-              is_visited: CHECKBOX.checked
-            };
-            (async() => {await sendPersonalMarkerInfo(marker, JSON.stringify(formJson))})();
-          }
-        });
-
-        return form
-      }
-    </script>
   <script>
-    var map, newMarker, markerLocation;
-    var popup = L.popup({
-    closeButton: true,
-    autoClose: true,
-    className: "custom-popup"
-    })
-    var customIcon1 = L.icon({
-      iconUrl: 'img/icon1.png',
-      iconSize: [37, 51],
-      popupAnchor: [-380, 250]
-    });
-    var userIcon = L.icon({
-      iconUrl: 'img/userIcon.png',
-      iconSize: [37, 51],
-      popupAnchor: [-380, 250]
-    });
-    
-    map = L.map('map', {
-      center: [56.8309, 60.5946],
-      zoom: 12.5});
-    L.tileLayer('https://api.mapbox.com/styles/v1/generalgrishus/clhmfa98c01qx01p6ci5d99ww/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZ2VuZXJhbGdyaXNodXMiLCJhIjoiY2xnejFrMTJlMGY4YjNwcG54MDloaXQ3ZSJ9.N0i1jCyysnamgv6lbrJYMg', {
-        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery  <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 19,    
-    }).addTo(map);
-    map.zoomControl.setPosition('bottomleft');
-    var layer1 = L.geoJSON(null, {layerName: 'layer1'}).addTo(map);
-    var touristPoint = L.marker([56.83845, 60.60332], {icon : customIcon1 }).addTo(layer1);
-    touristPoint.bindPopup('Мост "Плотинка"');
-    var layer2 = L.geoJSON(null, {layerName: 'layer2'}).addTo(map);
-    var marker = L.marker([56.84387, 60.65367], {icon : customIcon1 }).addTo(layer2);
-    marker.bindPopup(popup);
-    marker = L.marker([56.83242, 60.60744], {icon : customIcon1 }).addTo(layer2);
-    marker.bindPopup('Памятник "Клавиатуре"');
-    
-    marker = L.marker([56.82878, 60.59911], {icon : customIcon1 }).addTo(layer2);
-    marker.bindPopup('Торговый центр "Гринвич"');
-    marker = L.marker([56.84638, 60.67985], {icon : customIcon1 }).addTo(layer2);
-    marker.bindPopup('Шарташские каменные палатки');
-    // marker = L.marker([56.83242, 60.60744], {icon : customIcon1 }).addTo(map);
-    // marker.bindPopup('Памятник "Клавиатуре"');
-    // marker = L.marker([56.83242, 60.60744], {icon : customIcon1 }).addTo(map);
-    // marker.bindPopup('Памятник "Клавиатуре"');
-    // marker = L.marker([56.83242, 60.60744], {icon : customIcon1 }).addTo(map);
-    // marker.bindPopup('Памятник "Клавиатуре"');
-    marker = L.marker([56.8146, 60.6432], {icon : customIcon1 }).addTo(layer2);
-    marker.bindPopup("Парк имени Маяковского");
-    touristPoint = L.marker([56.83598, 60.61456], {icon : customIcon1 }, {
-      title: "Бизнес-центр Высоцкий",
-    }).addTo(layer2);
-    touristPoint.bindPopup("<div class = 'sightWindow'>" + '<h2>Смотровая площадка бизнес центра "Высоцкий"</h2>' +
-      "<img src='img/высоцкий.jpg' width='300px' height='170px'>"+
-      "</div>" +
-      "<p></p>" +
-      "<i><b><a href='VysotskyPage.html'>Бизнес-центр Высоцкий</a></b></i>");  
-    (async() => {await setPersonalMarkers(map, customIcon1)})()
+    addMarker = function () {
+      var newMarkerGroup = new L.layerGroup();
+      map.addLayer(newMarkerGroup);
+      map.on('click', function (e) {
+        var markersCount = newMarkerGroup.getLayers().length;
+        if (markersCount < 1) {
+          var mark = L.marker(e.latlng, { icon: userIcon }).addTo(newMarkerGroup);
+          mark._leaflet_id = null;
+          mark
+            .bindPopup(createPlaceForm(mark, "Новое место", "Описание", isVisited = false, isPersonalMarker = true))
+            .openPopup();
+          return;
+        }
+
+      });
+    }
   </script>
+
+  <!-- <script>
+    function save() {
+      let f = file1.files[0];
+      if (f) {
+        image1.src = URL.createObjectURL(f);
+        localStorage.setItem('myImage', image1.src);
+      }
+    }
+    image1.src = localStorage.getItem('myImage')</script> -->
 
   <script>
     var checkbox = document.querySelector('.cityFilter');
-    checkbox.addEventListener('change', function(){
-      if (this.checked){
+    checkbox.addEventListener('change', function () {
+      if (this.checked) {
         console.log("Checked");
-      } else{
+      } else {
         console.log("Not checked");
       }
     });
@@ -278,54 +102,21 @@
     var checkbox1 = document.getElementById("greenmarkertoggle");
     var checkbox2 = document.getElementById("bluemarkertoggle");
     function handleCheckbox() {
-    if (checkbox1.checked) {
-      map.addLayer(layer1);
-    } else {
-      map.removeLayer(layer1);
-    }
-  
-    if (checkbox2.checked) {
-      map.addLayer(layer2);
-    } else {
-      map.removeLayer(layer2);
-    }
-  }
-  checkbox1.addEventListener('change', handleCheckbox);
-  checkbox2.addEventListener('change', handleCheckbox);
-  </script>
-  <script>
-    addMarker = function(){
-      var newMarkerGroup = new L.layerGroup();
-    map.addLayer(newMarkerGroup);
-    map.on('click', function(e){
-      var markersCount = newMarkerGroup.getLayers().length;
-      if (markersCount < 1) {
-        var mark = L.marker(e.latlng, {icon : userIcon }).addTo(newMarkerGroup);
-        mark._leaflet_id = null;
-        mark
-        .bindPopup(createPlaceForm(mark, "Новое место", "Описание", isVisited=false, isPersonalMarker=true))
-        .openPopup();
-        return;
-    }
-      
-    });
-    }
-  </script>
+      if (checkbox1.checked) {
+        map.addLayer(layer1);
+      } else {
+        map.removeLayer(layer1);
+      }
 
-  
-  
-
-  <!-- Add your site or application content here -->
-  <script src="js/vendor/modernizr-3.11.2.min.js"></script>
-  <script src="js/plugins.js"></script>
-  <script src="js/main.js"></script>
-
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-  <script>
-    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
-    ga('create', 'UA-XXXXX-Y', 'auto'); ga('set', 'anonymizeIp', true); ga('set', 'transport', 'beacon'); ga('send', 'pageview')
+      if (checkbox2.checked) {
+        map.addLayer(layer2);
+      } else {
+        map.removeLayer(layer2);
+      }
+    }
+    checkbox1.addEventListener('change', handleCheckbox);
+    checkbox2.addEventListener('change', handleCheckbox);
   </script>
-  <script src="https://www.google-analytics.com/analytics.js" async></script>
 </body>
 
 </html>

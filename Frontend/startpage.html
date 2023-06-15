@@ -13,7 +13,8 @@
     <img class = "aboutUsButton" src="img/aboutUs.png">
     <img class = "contactUsButton" src="img/contactUs.png">
     <a href = "#feedback"><img class = "contactUsHover" id = "contactUsImage" src = "img/contactUsHover.png" onclick="changeImage2()"></a>
-    <a href="index.html"><img class = "openMapLink" src="img/startMap.png" onclick="getRequest()"></a>
+    <a href="index.html"><img class = "openMapLinkHover" src="img/startMapHover.png"></a>
+    <img class = "openMapLink" src="img/startMap.png">
     <a href ="registerPage.html">Зарегистрироваться</a>
     <a href="authorizationPage.html">Войти</a>
     <img class = "backImg" src ="img/startpage1.png"
@@ -57,15 +58,6 @@ function changeImage1() {
     image.src = "img/contactUsHover.png"
   }
 }
-</script>
-<script>
-  function getRequest() {
-    const url = 'https://ada0-212-220-231-50.ngrok-free.app/places/';
-    const request = axios.get(url)
-    .then(function (response) {
-    console.log(response.data());
-  });
-  }
 </script>
 </body>
 </html>

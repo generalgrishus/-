@@ -83,8 +83,26 @@
         body: data
     };
         const response = await fetch("http://127.0.0.1:8000/places/", config)
-        const json = await response.json()
-        console.log(json)
+        
+        return response
+    }
+    </script>
+    <script>
+      async function putAsync(data, markerId){
+        var cookie = Cookies.get('csrftoken');
+        console.log(data)
+        const config = {
+        method: "PUT",
+        headers: {
+        "X-CSRFToken": cookie,
+        "Content-Type": "application/json",
+    },
+        credentials: 'include',
+        body: data
+    };
+        const response = await fetch(`http://127.0.0.1:8000/places/${markerId}/`, config)
+        
+        return response
     }
     </script>
     <script>
@@ -96,6 +114,28 @@
             const marker = L.marker(coordinates, {icon : customIcon }).addTo(layer2);
             marker._leaflet_id = obj.id;
             marker.bindPopup(createPlaceForm(marker, obj.name, obj.description, obj.is_visited, isPersonalMarker=true));
+        }
+      }
+    </script>
+    <script>
+      async function sendPersonalMarkerInfo(marker, data){
+        if (marker._leaflet_id == null){
+          const response = await postAsync(data);
+          const json = await response.json();
+          console.log(json);
+          if (response.status == 201){
+            marker._leaflet_id = json.id;
+            map.closePopup();
+            marker.setIcon(customIcon1);
+          }
+        }
+        else{
+          const response = await putAsync(data, marker._leaflet_id);
+          const json = await response.json();
+          console.log(json);
+          if (response.status == 200){
+            map.closePopup();
+          }
         }
       }
     </script>
@@ -136,11 +176,9 @@
 
         $(form).submit(function(e) {
           e.preventDefault();
-          console.log(marker._leaflet_id)
+          const formData = new FormData(e.target);
           if (marker._leaflet_id == null)
           {
-            const formData = new FormData(e.target);
-            console.log(CHECKBOX.checked)
             var formJson = {
               name: formData.get('placeName'),
               lat: marker.getLatLng().lat.toFixed(6),
@@ -148,9 +186,17 @@
               description: formData.get('placeDescription'),
               is_visited: CHECKBOX.checked
             };
-            (async() => {await postAsync(JSON.stringify(formJson))})();
-            map.closePopup();
-            marker.setIcon(customIcon1);
+            (async() => {await sendPersonalMarkerInfo(marker, JSON.stringify(formJson))})();
+            
+          }
+          else
+          {
+            var formJson = {
+              name: formData.get('placeName'),
+              description: formData.get('placeDescription'),
+              is_visited: CHECKBOX.checked
+            };
+            (async() => {await sendPersonalMarkerInfo(marker, JSON.stringify(formJson))})();
           }
         });
 

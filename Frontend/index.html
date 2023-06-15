@@ -24,6 +24,13 @@
   <link rel="stylesheet" href="leaflet.css">
 
   <meta name="theme-color" content="#fafafa">
+  <script src="indexMap.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+     <script src="
+     https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js
+     "></script>
 </head>
 
 <body>
@@ -44,12 +51,7 @@
   <div id="marker"></div>
   <div id="custom-popup"></div>
 
-  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-     crossorigin=""></script>
-     <script src="
-     https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js
-     "></script>
+  
     <script>
       async function getGETJsonAsync(){
         const response = await getGETResponseAsync()

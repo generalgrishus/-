@@ -28,12 +28,16 @@ html{
   z-index: 2;
   position: absolute;
   margin-left: 5%;
-  margin-top: 100px;
+  margin-top: 6%;
+  width: 23%;
+  height: 15%;
 }
 .aboutUsHover{
   z-index: 3;
-  margin-left: 95px;
-  margin-top: 100px;
+  margin-left: 5%;
+  margin-top: 6%;
+  width: 23%;
+  height: 15%;
   opacity: 0.0;
   position: absolute;
   transition: opacity .3s ease;
@@ -46,16 +50,18 @@ html{
 .contactUsButton{
   z-index: 2;
   position: absolute;
-  width: 330px;
-  margin-left: 97px;
-  margin-top: 213px;
+  margin-left: 5%;
+  margin-top: 13%;
+  width: 23%;
+  height: 15%;
 }
 .contactUsHover {
   z-index: 3;
   position: absolute;
-  margin-left: 97px;
-  margin-top: 213px;
-  width: 330px;
+  margin-left: 5%;
+  margin-top: 13%;
+  width: 23%;
+  height: 15%;
   opacity: 0;
   transition: opacity .3s ease;
 }
@@ -67,13 +73,27 @@ html{
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  position: absolute;
   padding: 10px;
   gap: 20px;
+  width: 31%;
+  height: 23%;
+  top: 69%;
+  left: 55%;
+}
+.openMapLinkHover{
+  z-index: 3;
   position: absolute;
-  width: 450px;
-  height: 190px;
-  top: 487px;
-  left: 849px;
+  top: 69%;
+  left: 55%;
+  opacity: 0;
+  transition: opacity .3s ease;
+  width: 31%;
+  height: 23%;
+}
+.openMapLinkHover:hover {
+  z-index: 3;
+  opacity: 1;
 }
 .startpageCenter{
   z-index: 2;

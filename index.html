@@ -32,17 +32,41 @@
     <div class="backToStart">
       <a href="startpage.html"><img src="img/tostartPageButton.png"></a>
     </div>
-    <div class="block">
-      <button type="button" id="markLoc" onclick="addMarker()">Добавить место на карту</button><br>
-      <a class="btn-modal" href="#modal-block">Фильтры</a>
+    <div class="modal-window">
+      <a href= "#modal-block"><img class = "openFilterHover" src ="img/openFilterHover.png"></a>
+      <img class = "openFilter" src = "img/openFilter.png">
     </div>
-
+    <div>
+      <img class = "addPlaceHover" src = "img/addPlaceButHover.png" id="markLoc" onclick="addMarker()"><br>
+      <img class = "addPlace" src = "img/addPlaceBut.png">
+    </div>
     <div id="modal-block">
-      <a class="close-block" href="#close-block">X</a>
-      <input type="checkbox" checked="checked" id="greenmarkertoggle" class="cityFilter" name="shoppingMalls" />
-      <label for="greenmarkertoggle">ПЛОТИНКА!!!!</label><br>
-      <input type="checkbox" checked="checked" id="bluemarkertoggle" class="cityFilter" />
-      <label for="bluemarkertoggle">Не плотинка...</label>
+      <img class = "colorPanel" src = "img/marksPlaces.png">
+      <a class="close-block" href="#close-block"><img class="closeWindow" src="img/closeWindow.png"></a>
+
+      <img class = "radioButton" id = "radiobutton" src = "img/activeRadioButton.png">
+      <input type="checkbox" checked="checked" id="pinkmarkertoggle" class="cityFilter" name="shoppingMalls">
+      <label for="pinkmarkertoggle" class="checkbox-image">Музеи</label><br>
+
+      <img class = "radioButton1" id = "radiobutton" src = "img/activeRadioButton.png">
+      <input type="checkbox" checked="checked" id="bluemarkertoggle" id = "checkboxImage" class="cityFilter1">
+      <label class="checkbox-image" for="bluemarkertoggle">Памятники</label><br>
+
+      <img class = "radioButton1" id = "radiobutton" src = "img/activeRadioButton.png">
+      <input type="checkbox" checked="checked" id="orangemarkertoggle" id = "checkboxImage" class="cityFilter1">
+      <label class="checkbox-image" for="orangemarkertoggle">Что-то еще</label><br>
+
+      <img class = "radioButton1" id = "radiobutton" src = "img/activeRadioButton.png">
+      <input type="checkbox" checked="checked" id = "checkboxImage" id="greenmarkertoggle" class="cityFilter1">
+      <label class="checkbox-image" for="greenmarkertoggle">Парки</label><br>
+
+      <img class = "radioButton1" id = "radiobutton" src = "img/activeRadioButton.png">
+      <input type="checkbox" checked="checked" id = "checkboxImage" id="yellowmarkertoggle" class="cityFilter1">
+      <label class="checkbox-image" for="yellowmarkertoggle">Природные </label><br>
+
+      <img class = "radioButton1" id = "radiobutton" src = "img/activeRadioButton.png">
+      <input type="checkbox" checked="checked" id = "checkboxImage" id="purplemarkertoggle" class="cityFilter1" />
+      <label class="checkbox-image" for="purplemarkertoggle">Атмосферные места</label>
     </div>
   </div>
 
@@ -68,27 +92,87 @@
           var mark = L.marker(e.latlng, { icon: userIcon }).addTo(newMarkerGroup);
           mark._leaflet_id = null;
           mark
-            .bindPopup(createPlaceForm(mark, "Новое место", "Описание", isVisited = false, isPersonalMarker = true))
+            .bindPopup(createPlaceForm(mark, "Новое место", "Описание", isVisited = false, isPersonalMarker = true),  {className: 'user-popup'})
             .openPopup();
           return;
         }
-
       });
     }
   </script>
 
-  <!-- <script>
-    function save() {
-      let f = file1.files[0];
-      if (f) {
-        image1.src = URL.createObjectURL(f);
-        localStorage.setItem('myImage', image1.src);
-      }
-    }
-    image1.src = localStorage.getItem('myImage')</script> -->
+  <script>
+    var checkbox = document.getElementById('pinkmarkertoggle');
+    var checkbox2 = document.getElementById('bluemarkertoggle');
+    var checkbox3 = document.getElementById('orangemarkertoggle');
+    var checkbox4 = document.getElementById('greenmarkertoggle');
+    var checkbox5 = document.getElementById('yellowmarkertoggle');
+    var checkbox6 = document.getElementById('purplemarkertoggle');
+    var image = document.getElementById('radiobutton');
+    var image2 = document.getElementById('radiobutton1');
+    var image3 = document.getElementById('radiobutton1');
+    var image4 = document.getElementById('radiobutton1');
+    var image5 = document.getElementById('radiobutton1');
+    var image6 = document.getElementById('radiobutton1');
 
+    checkbox.addEventListener('change', function() {
+      if (this.checked) {
+        image.src = "img/activeRadioButton.png";
+      } else {
+        image.src = "img/notActiveRadioButton.png";
+      }
+    });
+    
+    checkbox2.addEventListener('change', function() {
+      if (this.checked) {
+        image2.src = "img/activeRadioButton.png";
+      } else {
+        image2.src = "img/notActiveRadioButton.png";
+      }
+    });
+
+    checkbox3.addEventListener('change', function() {
+      if (this.checked) {
+        image3.src = "img/activeRadioButton.png";
+      } else {
+        image3.src = "img/notActiveRadioButton.png";
+      }
+    });
+    checkbox4.addEventListener('change', function() {
+      if (this.checked) {
+        image4.src = "img/activeRadioButton.png";
+      } else {
+        image4.src = "img/notActiveRadioButton.png";
+      }
+    });
+    checkbox5.addEventListener('change', function() {
+      if (this.checked) {
+        image4.src = "img/activeRadioButton.png";
+      } else {
+        image4.src = "img/notActiveRadioButton.png";
+      }
+    });
+    checkbox6.addEventListener('change', function() {
+      if (this.checked) {
+        image5.src = "img/activeRadioButton.png";
+      } else {
+        image5.src = "img/notActiveRadioButton.png";
+      }
+    });
+  </script>
+  <script>
+    var checkbox2 = document.getElementById('bluemarkertoggle');
+    var image1 = document.getElementById('radiobutton1');
+    checkbox2.addEventListener('change', function() {
+      if (this.checked) {
+        image1.src = "img/activeRadioButton.png";
+      } else {
+        image1.src = "img/notActiveRadioButton.png";
+      }
+    });
+  </script>
   <script>
     var checkbox = document.querySelector('.cityFilter');
+    
     checkbox.addEventListener('change', function () {
       if (this.checked) {
         console.log("Checked");
@@ -99,8 +183,23 @@
   </script>
 
   <script>
-    var checkbox1 = document.getElementById("greenmarkertoggle");
+    var checkbox2 = document.querySelector('.cityFilter1');
+  
+    checkbox2.addEventListener('change', function () {
+      if (this.checked) {
+        console.log("Checked");
+      } else {
+        console.log("Not checked");
+      }
+  });
+  </script>
+  <script>
+    var checkbox1 = document.getElementById("pinkmarkertoggle");
     var checkbox2 = document.getElementById("bluemarkertoggle");
+    var checkbox3 = document.getElementById("orangemarkertoggle");
+    var checkbox4 = document.getElementById("greenmarkertoggle");
+    var checkbox5 = document.getElementById("yellowmarkertoggle");
+    var checkbox6 = document.getElementById("purplemarkertoggle");
     function handleCheckbox() {
       if (checkbox1.checked) {
         map.addLayer(layer1);
@@ -113,9 +212,37 @@
       } else {
         map.removeLayer(layer2);
       }
+
+      if (checkbox3.checked) {
+        map.addLayer(layer3);
+      } else {
+        map.removeLayer(layer3);
+      }
+
+      if (checkbox4.checked) {
+        map.addLayer(layer4);
+      } else {
+        map.removeLayer(layer4);
+      }
+      if (checkbox5.checked) {
+        map.addLayer(layer5);
+      } else {
+        map.removeLayer(layer5);
+      }
+
+      if (checkbox6.checked) {
+        map.addLayer(layer6);
+      } else {
+        map.removeLayer(layer6);
+      }
     }
     checkbox1.addEventListener('change', handleCheckbox);
     checkbox2.addEventListener('change', handleCheckbox);
+    checkbox3.addEventListener('change', handleCheckbox);
+    checkbox4.addEventListener('change', handleCheckbox);
+    checkbox5.addEventListener('change', handleCheckbox);
+    checkbox6.addEventListener('change', handleCheckbox);
+    checkbox7.addEventListener('change', handleCheckbox);
   </script>
 </body>
 

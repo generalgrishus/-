@@ -10,6 +10,8 @@ html{
   left: 0;
   right: 0;
   margin-bottom: 0;
+  width: 100%;
+  height: 100%;
   }
 
 .startpageUp {
@@ -28,16 +30,16 @@ html{
   z-index: 2;
   position: absolute;
   margin-left: 5%;
-  margin-top: 6%;
-  width: 23%;
-  height: 15%;
+  margin-top: 9%;
+  width: 28%;
+  height: 19%;
 }
 .aboutUsHover{
   z-index: 3;
   margin-left: 5%;
-  margin-top: 6%;
-  width: 23%;
-  height: 15%;
+  margin-top: 9%;
+  width: 28%;
+  height: 19%;
   opacity: 0.0;
   position: absolute;
   transition: opacity .3s ease;
@@ -46,91 +48,55 @@ html{
   z-index: 3;
   opacity: 1;
 }
-
-.contactUsButton{
+.openRegLink{
+  width: 13%;
   z-index: 2;
   position: absolute;
-  margin-left: 5%;
-  margin-top: 13%;
-  width: 23%;
-  height: 15%;
+  top: 50%;
+  left: 54%;
 }
-.contactUsHover {
+.openRegLinkHover{
   z-index: 3;
   position: absolute;
-  margin-left: 5%;
-  margin-top: 13%;
-  width: 23%;
-  height: 15%;
+  width: 13%;
+  top: 50.1%;
+  left: 54%;
   opacity: 0;
   transition: opacity .3s ease;
 }
- .contactUsHover:hover{
-   z-index: 3;
-   opacity: 1;
- }
+.openRegLinkHover:hover{
+  opacity: 1;
+}
 .openMapLink{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  z-index: 2;
   position: absolute;
-  padding: 10px;
-  gap: 20px;
+  top: 67%;
+  left: 58%;
   width: 31%;
   height: 23%;
-  top: 69%;
-  left: 55%;
+}
+.openMapLinkHover:hover{
+  opacity: 1;
 }
 .openMapLinkHover{
   z-index: 3;
   position: absolute;
-  top: 69%;
-  left: 55%;
+  top: 67%;
+  left: 58%;
   opacity: 0;
   transition: opacity .3s ease;
   width: 31%;
   height: 23%;
-}
-.openMapLinkHover:hover {
-  z-index: 3;
-  opacity: 1;
 }
 .startpageCenter{
   z-index: 2;
   position: relative;
   margin: -8px;
 }
-.inf{
-  position: absolute;
-  margin-top: 750px;
-  margin-left: 100px;
+.aboutUsPage{
+  margin-bottom: -4px;
 }
 .startPageFirstBottom{
   margin: -8px;
   background-size: 100%, 100%;
 }
-.bottomPicture{
-  z-index: 2;
-  position: absolute;
-  margin: -8px;
-  background-size: 100%, 100%;
-}
-.sendButton{
-  opacity: 1;
-  z-index: 2;
-  position: absolute;
-  margin-left: 1047px;
-  margin-top: 267px;
-}
-.sendButtonHover{
-  position: absolute;
-  opacity: 0;
-  z-index: 2;
-  margin-left: 1047px;
-  margin-top: 267px;
-  transition: opacity .3s ease;
-}
-.sendButton, .sendButtonHover:hover{
-  opacity: 1;
-}
-

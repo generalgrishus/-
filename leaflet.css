@@ -1,3 +1,7 @@
+@font-face {
+  font-family: 'tatianactt';
+  src: url(Шрифты/tatianactt.ttf);
+}
 html::-webkit-scrollbar{
   width:0;
 }
@@ -5,6 +9,9 @@ html{
   scroll-behavior: smooth;
 }
 
+.placeForm{
+  font-family: 'tatianactt';
+}
 .map-wrapper{
   position: relative;
   width: 100%;
@@ -31,13 +38,45 @@ html{
   top: 85px;
   z-index: 2;
 }
-.leaflet-popup-content-wrapper, .custom-popup {
+.addPlace{
+  margin-left: 85%;
+  position: absolute;
+  z-index: 2;
+  margin-top: 20px;
+}
+.addPlaceHover{
+  margin-left: 85%;
+  margin-top: 41px;
+  position: absolute;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity .5s ease;
+  cursor: pointer;
+}
+.addPlaceHover:hover{
+  opacity: 1;
+}
+
+.custom-popup .leaflet-popup-content-wrapper{
   background: url(img/placeWindow.png);
+  width: 617px;
+  height: 697px;
+}
+
+.user-popup .leaflet-popup-content-wrapper{
+  background: url(img/userWindow.png);
     border-radius: 0;
-    width: 617px;
-    height: 697px;
+    width: 749px;
+    height: 609px;
     z-index: 1000;
 }
+
+.leaflet-popup-content-wrapper {
+    border-radius: 0;
+    z-index: 1000;
+}
+
+
 .leaflet-popup-tip-container {
     left: 100%;
     top: 52%;
@@ -61,62 +100,137 @@ html{
     color: rgb(27, 21, 187); 
   }
 
-.btn-modal {
-  cursor: pointer;
-  padding: 1rem 3rem;
-  color: #fff;
-  text-decoration: none;
-  background-color:rgb(173, 128, 12);
-  transition: all 0.3s ease-out;
-  margin-left: 1300px;
-  top: 5%;
+.openFilter{
+  z-index: 2;
+  position: absolute;
+  margin-left: 85.5%;
+  margin-top: 120px;
 }
-.btn-modal:hover {
-  background-color: #4f4109;
+.openFilterHover {
+  cursor: pointer;
+  position: absolute;
+  z-index: 3;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  margin-left: 85.5%;
+  margin-top: 120px;
+}
+.openFilterHover:hover {
+  opacity: 1;
 }
 
 /* Модальное окно */
 #modal-block { 
-  background-color:#bce201;
-  color: #fff;
+  background: url(img/modalWindow.png);
+  color: #FFE864;
   position: absolute;
   top:0;
   left:-100vw;
   width:300px;
   height: 100vh;
   transition: all .5s;
-  font-family: 'Raleway', sans-serif;
+  font-family: 'tatianactt';
   z-index: 9;
 
 }
 #modal-block:target{
-  display:flex;
   align-items:center;
   justify-content:center;
   flex-direction: column;
   left:0;
 }
-
+.colorPanel{
+  position: absolute;
+  z-index: 2;
+  margin-top: 77%;
+  margin-left: 28%;
+  height: 240px;
+}
+.checkbox-image{
+  margin-left: 30px;
+}
+.radioButton{
+  position: absolute;
+  z-index: -1;
+  margin-top: 77%;
+  margin-left: 19%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.cityFilter{
+  opacity: 0;
+  cursor: pointer;
+  margin-top: 78%;
+  margin-left: 20%;
+}
+.radioButton1{
+  position: absolute;
+  z-index: -1;
+  width: 20px;
+  height: 20px;
+  margin-left: 19%;
+  margin-top: 7%;
+}
+.cityFilter1{
+  margin-top: 8%;
+  margin-left: 20%;
+  opacity: 0;
+  cursor: pointer;
+}
 .close-block{
   display: flex;
   position: absolute;
   top: 1%;
   right: 1%;
   padding: .5em;
-  background-color: #fff;
-  color: #527c82;
-  text-decoration: none;
-  font-size: 1em;
   box-sizing: border-box;
+}
+.closeWindow{
+  width: 75%;
+  height: 75%;
 }
 .vysotskyWindow{
   margin-left: 95px;
-  margin-top: 25px;
+  margin-top: 45px;
   width: 125%;
 }
+.popupWindow{
+  margin-left: 95px;
+  margin-top: 45px;
+}
 .sightName{
+  position: absolute;
   text-align: center;
-  margin-left: 195px;
+  font-family: 'tatianactt';
+  color: white;
+  margin-top: 30px;
+  margin-left: 85px;
+  font-size: 26px;
+  margin-right: 95px;
+}
+.sightName1{
+  position: absolute;
+  text-align: center;
+  font-family: 'tatianactt';
+  color: white;
+  margin-top: 40px;
+  margin-left: 205px;
+  font-size: 26px;
+  margin-right: 95px;
+}
+.sightLink{
+  text-decoration: none;
+}
+.sightInf{
+  position: absolute;
+  text-align: center;
+  font-family: 'tatianactt';
+  font-size: 18px;
+  color: #296d4d;
+  margin-top: 100px;
+  margin-left: 50px;
+  margin-right: 75px;
 }
 .addPhoto{
   position: absolute;

@@ -18,25 +18,25 @@
     opacity: 1;
 }
 .usernameText{
-    color: rgb(199, 179, 25);
+    color: #FFE864;
     text-align: center;
     margin-left: 235px;
     margin-top: 34%;
 }
 .emailText{
-    color: rgb(199, 179, 25);
+    color: #FFE864;
     text-align: center;
     margin-left: 235px;
     margin-top: 8%;
 }
 .passwordText{
-    color: rgb(199, 179, 25);
+    color: #FFE864;
     text-align: center;
     margin-left: 235px;
     margin-top: 9%;
 }
 .passwordText1{
-    color: rgb(199, 179, 25);
+    color: #FFE864;
     text-align: center;
     margin-left: 235px;
     margin-top: 9%;

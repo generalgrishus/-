@@ -11,34 +11,18 @@
   <div class="startpageUp">
     <a href = "#information"><img class = "aboutUsHover" id = "aboutUsImage" src ="img/aboutUsHover.png" onclick="changeImage1()"></a>
     <img class = "aboutUsButton" src="img/aboutUs.png">
-    <img class = "contactUsButton" src="img/contactUs.png">
-    <a href = "#feedback"><img class = "contactUsHover" id = "contactUsImage" src = "img/contactUsHover.png" onclick="changeImage2()"></a>
-    <a href="index.html"><img class = "openMapLinkHover" src="img/startMapHover.png"></a>
+    <a href="index.html"><img class = "openMapLinkHover" id = "loginImage" src="img/startMapHover.png"onclick="changeImage2()"></a>
     <img class = "openMapLink" src="img/startMap.png">
-    <a href ="registerPage.html">Зарегистрироваться</a>
-    <a href="authorizationPage.html">Войти</a>
-    <img class = "backImg" src ="img/startpage1.png"
-    width=100%
-    height=100%>
-  </div>
-  <div class = "startpageCenter">
-    <!-- <img class = "inf" src="img/alertInf.png"> -->
-    <img src="img/startpage2.png" width=100%>
+    <a href ="registerPage.html"><img class = "openRegLinkHover" id = "regImage" src="img/registerButtonHover.png" onclick="changeImage3()"></a>
+    <img class = "openRegLink" src="img/registerButton.png">
+    <img class = "backImg" src ="img/startpage1.png">
   </div>
   <div class = "startPageFirstBottom">
     <article id="information">
-      <img src = "img/startpage3.png" width=100%>
+      <img class="aboutUsPage" src = "img/startpage2.png" width=100% height=100%>
     </article>
-  </div>
-  <div class = "startPageEndBottom">
-    <article id="feedback">
-      <img class = "bottomPicture" src = "img/startpage4.png" width=100%>
-    </article>
-    <img class = "sendButton" src="img/send.png">
-    <input type="image" class = "sendButtonHover" src="img/sendHover.png">
   </div>
 </div>
-<!--<img src="/img/desktop.png" width = 100%>-->
 <script>
 function changeImage1() {
   var image = document.getElementById('aboutUsImage');
@@ -51,13 +35,24 @@ function changeImage1() {
 </script>
 <script>
   function changeImage2() {
-  var image = document.getElementById('contactUsImage');
-  if (image.src.match("img/contactUsHover.png")) {
-    image.src = "img/contactUsPressed.png";
-  } else {
-    image.src = "img/contactUsHover.png"
+    var image = document.getElementById('loginImage');
+    if (image.src.match("img/startMapHover.png")) {
+      image.src = "img/startMapPressed.png";
+    } else {
+      image.src = "img/startMapHover.png"
+    }
   }
-}
+</script>
+
+<script>
+  function changeImage3() {
+    var image = document.getElementById('regImage');
+    if (image.src.match("img/registerButtonHover.png")) {
+      image.src = "img/registerButtonPressed.png";
+    } else {
+      image.src = "img/registerButtonHover.png"
+    }
+  }
 </script>
 </body>
 </html>

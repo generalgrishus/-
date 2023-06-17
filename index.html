@@ -44,29 +44,29 @@
       <img class = "colorPanel" src = "img/marksPlaces.png">
       <a class="close-block" href="#close-block"><img class="closeWindow" src="img/closeWindow.png"></a>
 
-      <img class = "radioButton" id = "radiobutton" src = "img/activeRadioButton.png">
-      <input type="checkbox" checked="checked" id="pinkmarkertoggle" class="cityFilter" name="shoppingMalls">
-      <label for="pinkmarkertoggle" class="checkbox-image">Музеи</label><br>
+      
+      <input type="checkbox" checked="checked" id="pinkmarkertoggle" class="cityFilter">
+      <label for="pinkmarkertoggle" class="checkbox-image">Символы города</label><br>
 
-      <img class = "radioButton1" id = "radiobutton" src = "img/activeRadioButton.png">
-      <input type="checkbox" checked="checked" id="bluemarkertoggle" id = "checkboxImage" class="cityFilter1">
-      <label class="checkbox-image" for="bluemarkertoggle">Памятники</label><br>
+      
+      <input type="checkbox" checked="checked" id="bluemarkertoggle" class="cityFilter1">
+      <label class="checkbox-image" for="bluemarkertoggle">Музеи</label><br>
 
-      <img class = "radioButton1" id = "radiobutton" src = "img/activeRadioButton.png">
-      <input type="checkbox" checked="checked" id="orangemarkertoggle" id = "checkboxImage" class="cityFilter1">
-      <label class="checkbox-image" for="orangemarkertoggle">Что-то еще</label><br>
+      
+      <input type="checkbox" checked="checked" id="orangemarkertoggle" class="cityFilter1">
+      <label class="checkbox-image" for="orangemarkertoggle">Храмы и монастыри</label><br>
 
-      <img class = "radioButton1" id = "radiobutton" src = "img/activeRadioButton.png">
-      <input type="checkbox" checked="checked" id = "checkboxImage" id="greenmarkertoggle" class="cityFilter1">
+      
+      <input type="checkbox" checked="checked" id="greenmarkertoggle" class="cityFilter1">
       <label class="checkbox-image" for="greenmarkertoggle">Парки</label><br>
 
-      <img class = "radioButton1" id = "radiobutton" src = "img/activeRadioButton.png">
-      <input type="checkbox" checked="checked" id = "checkboxImage" id="yellowmarkertoggle" class="cityFilter1">
-      <label class="checkbox-image" for="yellowmarkertoggle">Природные </label><br>
+      
+      <input type="checkbox" checked="checked" id="yellowmarkertoggle" class="cityFilter1">
+      <label class="checkbox-image" for="yellowmarkertoggle">Памятники</label><br>
 
-      <img class = "radioButton1" id = "radiobutton" src = "img/activeRadioButton.png">
-      <input type="checkbox" checked="checked" id = "checkboxImage" id="purplemarkertoggle" class="cityFilter1" />
-      <label class="checkbox-image" for="purplemarkertoggle">Атмосферные места</label>
+      
+      <input type="checkbox" checked="checked" id="purplemarkertoggle" class="cityFilter1" />
+      <label class="checkbox-image" for="purplemarkertoggle">Театры</label>
     </div>
   </div>
 
@@ -100,99 +100,6 @@
     }
   </script>
 
-  <script>
-    var checkbox = document.getElementById('pinkmarkertoggle');
-    var checkbox2 = document.getElementById('bluemarkertoggle');
-    var checkbox3 = document.getElementById('orangemarkertoggle');
-    var checkbox4 = document.getElementById('greenmarkertoggle');
-    var checkbox5 = document.getElementById('yellowmarkertoggle');
-    var checkbox6 = document.getElementById('purplemarkertoggle');
-    var image = document.getElementById('radiobutton');
-    var image2 = document.getElementById('radiobutton1');
-    var image3 = document.getElementById('radiobutton1');
-    var image4 = document.getElementById('radiobutton1');
-    var image5 = document.getElementById('radiobutton1');
-    var image6 = document.getElementById('radiobutton1');
-
-    checkbox.addEventListener('change', function() {
-      if (this.checked) {
-        image.src = "img/activeRadioButton.png";
-      } else {
-        image.src = "img/notActiveRadioButton.png";
-      }
-    });
-    
-    checkbox2.addEventListener('change', function() {
-      if (this.checked) {
-        image2.src = "img/activeRadioButton.png";
-      } else {
-        image2.src = "img/notActiveRadioButton.png";
-      }
-    });
-
-    checkbox3.addEventListener('change', function() {
-      if (this.checked) {
-        image3.src = "img/activeRadioButton.png";
-      } else {
-        image3.src = "img/notActiveRadioButton.png";
-      }
-    });
-    checkbox4.addEventListener('change', function() {
-      if (this.checked) {
-        image4.src = "img/activeRadioButton.png";
-      } else {
-        image4.src = "img/notActiveRadioButton.png";
-      }
-    });
-    checkbox5.addEventListener('change', function() {
-      if (this.checked) {
-        image4.src = "img/activeRadioButton.png";
-      } else {
-        image4.src = "img/notActiveRadioButton.png";
-      }
-    });
-    checkbox6.addEventListener('change', function() {
-      if (this.checked) {
-        image5.src = "img/activeRadioButton.png";
-      } else {
-        image5.src = "img/notActiveRadioButton.png";
-      }
-    });
-  </script>
-  <script>
-    var checkbox2 = document.getElementById('bluemarkertoggle');
-    var image1 = document.getElementById('radiobutton1');
-    checkbox2.addEventListener('change', function() {
-      if (this.checked) {
-        image1.src = "img/activeRadioButton.png";
-      } else {
-        image1.src = "img/notActiveRadioButton.png";
-      }
-    });
-  </script>
-  <script>
-    var checkbox = document.querySelector('.cityFilter');
-    
-    checkbox.addEventListener('change', function () {
-      if (this.checked) {
-        console.log("Checked");
-      } else {
-        console.log("Not checked");
-      }
-    });
-  </script>
-
-  <script>
-    var checkbox2 = document.querySelector('.cityFilter1');
-  
-    checkbox2.addEventListener('change', function () {
-      if (this.checked) {
-        console.log("Checked");
-      } else {
-        console.log("Not checked");
-      }
-  });
-  </script>
   <script>
     var checkbox1 = document.getElementById("pinkmarkertoggle");
     var checkbox2 = document.getElementById("bluemarkertoggle");

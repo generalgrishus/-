@@ -2,6 +2,9 @@
   font-family: 'tatianactt';
   src: url(Шрифты/tatianactt.ttf);
 }
+::-webkit-input-placeholder{
+  color: rgb(54, 54, 54);
+}
 html::-webkit-scrollbar{
   width:0;
 }
@@ -11,6 +14,62 @@ html{
 
 .placeForm{
   font-family: 'tatianactt';
+  z-index: 1;
+}
+#notActive, #active{
+  display: none;
+}
+#notActive {
+  display: block;
+}
+.noVisitPlace{
+  position: absolute;
+  z-index: 2;
+  margin-top: 6%;
+  margin-left: 63%;
+  cursor: pointer;
+}
+.visitPlace{
+  position: absolute;
+  z-index: 2;
+  margin-top: 6%;
+  margin-left: 63%;
+  cursor: pointer;
+}
+.namePlace{
+  position: absolute;
+  margin-top: 174px;
+  margin-left:186px;
+  font-size: 24px;
+  color: rgb(54, 54, 54);
+  background-color: transparent;
+  border: 2px solid #FFE864;
+  width: 401px;
+  height: 69px;
+}
+.wordPlace{
+  position: absolute;
+  margin-top: 300px;
+  margin-left: 75px;
+  font-size: 16px;
+  color: rgb(54, 54, 54);
+  background-color: rgb(227, 227, 227);
+  border: 1px solid rgb(6, 140, 22);
+  width: 589px;
+  height: 221px;
+}
+.userPlace{
+  position: absolute;
+  z-index: 3;
+  opacity: 0;
+  margin-top: 9.8%;
+  margin-left: 66%;
+  cursor: pointer;
+}
+.sendButton{
+  position: absolute;
+  margin-top: 539px;
+  margin-left: 454px;
 }
 .map-wrapper{
   position: relative;
@@ -149,33 +208,16 @@ html{
 .checkbox-image{
   margin-left: 30px;
 }
-.radioButton{
-  position: absolute;
-  z-index: -1;
-  margin-top: 77%;
-  margin-left: 19%;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
 .cityFilter{
-  opacity: 0;
+  opacity: 1;
   cursor: pointer;
   margin-top: 78%;
   margin-left: 20%;
 }
-.radioButton1{
-  position: absolute;
-  z-index: -1;
-  width: 20px;
-  height: 20px;
-  margin-left: 19%;
-  margin-top: 7%;
-}
 .cityFilter1{
   margin-top: 8%;
   margin-left: 20%;
-  opacity: 0;
+  opacity: 1;
   cursor: pointer;
 }
 .close-block{

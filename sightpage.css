@@ -39,6 +39,15 @@
     margin-left: 14%;
     text-align: center;
 }
+.nameSight1{
+    font-family: 'tatianactt';
+    z-index: 3;
+    font-size: 36px;
+    color:#23FF9E;
+    position: absolute;
+    margin-left: 7%;
+    text-align: center;
+}
 .text{
     position: absolute;
     font-family: 'tatianactt';
@@ -52,11 +61,23 @@
 .firstImg{
     position: absolute;
     z-index: 3;
-    margin-left: 62%;
+    margin-left: 63%;
 }
 .secondImg{
     position: absolute;
     z-index: 3;
     margin-left: 62%;
     margin-top: 27%;
+}
+.firstImg1{
+    position: absolute;
+    z-index: 3;
+    margin-left: 59%;
+    margin-top: 5%; 
+}
+.secondImg1{
+    position: absolute;
+    z-index: 3;
+    margin-left: 65%;
+    margin-top: 25%;
 }

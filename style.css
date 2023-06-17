@@ -1,9 +1,14 @@
+@font-face {
+  font-family: 'tatianactt';
+  src: url(Шрифты/tatianactt.ttf);
+}
 html::-webkit-scrollbar{
   width:0;
 }
 html{
   scroll-behavior: smooth;
 }
+
 .backImg{
   z-index: 0;
   top: 0;
@@ -97,6 +102,29 @@ html{
   margin-bottom: -4px;
 }
 .startPageFirstBottom{
-  margin: -8px;
+  margin-top: -23px;
+  margin-left: -8px;
+  margin-right: -8px;
+  margin-bottom: -8px;
   background-size: 100%, 100%;
+}
+.infText{
+  position: absolute;
+  margin-left: 139px;
+  margin-top: 220px;
+  margin-right: 549px;
+  z-index: 10;
+  font-size: 22px;
+  font-family: 'tatianactt';
+  color:#1CC278;
+}
+.infText2{
+  position: absolute;
+  z-index: 10;
+  margin-left: 139px;
+  margin-top: 540px;
+  margin-right: 549px;
+  font-family: 'tatianactt';
+  font-size: 22px;
+  color: #23FF9E;
 }
